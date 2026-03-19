@@ -1,6 +1,24 @@
-# MSA_Assessment
-***Project title: Assessing the accuracy of multiple sequence alignments, when analysing proteins***
+# MSA_Assessment - ***Project title: Assessing the accuracy of multiple sequence alignments, when analysing proteins***
 
+## Guide to understanding file names: 
+
+**Deletion Size**
+
+10aa - 10 amino acids removed from a sequence to introduce a gap
+
+30aa - 30 amino acids removed freom a sequence to introduce a gap
+
+**Gap Pattern** 
+
+A - pattern A
+
+- Each deletion window shifts by one residue along the sequence.
+- Example: variant n deletes residues i–i+9; variant n+1 deletes i+1–i+10.
+
+B - pattern B: gaps are not overlapping 
+
+- Each deletion window starts immediately after the previous one ends.
+- Example: variant n deletes i–i+9; variant n+1 deletes i+10–i+19.
 Alignments were generated and visualised using Jalview (version 2.11.5.1)
 
 ## ***MSA References (from Jalview)*** 
@@ -78,23 +96,3 @@ REFERENCE: Notredame C, Higgins DG, Heringa L,
 JMB, 302(1):205 (2000)
 
 MORE INFORMATION: http://tcoffee.crg.cat/apps/tcoffee/index.html
-
-## Guide to understanding file names: 
-
-**Deletion Size**
-
-10aa - 10 amino acids removed from a sequence to introduce a gap
-
-30aa - 30 amino acids removed freom a sequence to introduce a gap
-
-**Gap Pattern** 
-
-A - pattern A
-
-- Each deletion window shifts by one residue along the sequence.
-- Example: variant n deletes residues i–i+9; variant n+1 deletes i+1–i+10.
-
-B - pattern B: gaps are not overlapping 
-
-- Each deletion window starts immediately after the previous one ends.
-- Example: variant n deletes i–i+9; variant n+1 deletes i+10–i+19.
