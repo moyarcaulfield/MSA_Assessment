@@ -23,7 +23,7 @@ Alignments were generated and visualised using Jalview (version 2.11.5.1)
 
 ## ***MSA References (from Jalview)*** 
 
-### **ClustalW:** 
+### **ClustalW** 
 
 Alignment with ClustalWS using service hosted at http://www.compbio.dundee.ac.uk/jabaws
 SERVICE: ClustalWS version 2.1
