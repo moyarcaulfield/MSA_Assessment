@@ -6,6 +6,8 @@ Alignments were generated and visualised using Jalview (version 2.11.5.1)
 
 Accuracy of MSA methods is calculated by Total Column Score by AliDist software by Lars Jermiin
 
+Graphs and figures made
+
 ## Guide to understanding file names: 
 
 **Deletion Size**
