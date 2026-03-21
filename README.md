@@ -1,5 +1,8 @@
 # MSA_Assessment - ***Project title: Assessing the accuracy of multiple sequence alignments, when analysing proteins***
 
+> **Is it possible to rank accuracy of multiple sequence alignments?**
+
+
 Python code was written and executed in Spyder (version 6.1.3 | Python 3.12.11 64-bit | Qt 5.15.15 | PyQt5 5.15.11 Windows 11 (AMD64) )
 
 Alignments were generated and visualised using Jalview (version 2.11.5.1)
