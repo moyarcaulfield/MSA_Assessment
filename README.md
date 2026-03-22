@@ -21,7 +21,7 @@ Graphs and figures made
 
 **Gap Pattern** 
 
-A - pattern A
+A - pattern A: gaps are overlapping
 
 - Each deletion window shifts by one residue along the sequence.
 - Example: variant n deletes residues i–i+9; variant n+1 deletes i+1–i+10.
