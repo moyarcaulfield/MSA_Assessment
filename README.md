@@ -43,7 +43,7 @@ REFERENCE: Larkin MA, Blackshields G, Brown NP, Chenna R, McGettigan PA, McWilli
 "Clustal W and Clustal X version 2.0"
 Bioinformatics, 23: 2947 (2007)
 
-MORE INFORMATION: http://www.clustal.org/clustal2/
+MORE INFORMATION: http://www.clustal.org/clustal2/ or https://clustalw.com/
 
 ### **Clustal Omega** 
 
@@ -56,6 +56,18 @@ REFERENCE: Sievers F, Wilm A, Dineen D, Gibson TJ, Karplus K, Li W, Lopez R, McW
 Mol Syst Biol. 7:539 (2011)
 
 MORE INFORMATION: http://www.clustal.org/omega/
+
+### **MUSCLE**
+
+Alignment with MuscleWS using service hosted at http://www.compbio.dundee.ac.uk/jabaws
+SERVICE: MuscleWS version 3.8.31
+
+JABAWS v. 2.2
+REFERENCE: Edgar RC,
+"MUSCLE: multiple sequence alignment with high accuracy and high throughput"
+Nucleic Acids Res. 32(5):1792 (2004)
+
+MORE INFORMATION: http://www.drive5.com/muscle/
 
 ### **MAFFT (G-INS-i)**
 
@@ -70,18 +82,6 @@ Bioinformatics 26:1899 (2010)
 MORE INFORMATION: http://mafft.cbrc.jp/alignment/software/
 
 Using Server preset: G-INS-i (Accuracy-oriented)
-
-### **MUSCLE**
-
-Alignment with MuscleWS using service hosted at http://www.compbio.dundee.ac.uk/jabaws
-SERVICE: MuscleWS version 3.8.31
-
-JABAWS v. 2.2
-REFERENCE: Edgar RC,
-"MUSCLE: multiple sequence alignment with high accuracy and high throughput"
-Nucleic Acids Res. 32(5):1792 (2004)
-
-MORE INFORMATION: http://www.drive5.com/muscle/
 
 ### **ProbCons**
 
