@@ -1,0 +1,217 @@
+---
+title: "MSA_Accuracy"
+output: html_document
+date: "2026-03-24"
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(Hmisc)
+library(viridis)
+library(table1)
+```
+
+```{r warning=FALSE, echo=FALSE}
+
+table1(~TCS | MSAMethod, data=Summary_TC_Scores)
+
+```
+
+
+### Overall Alignment Accuracy
+```{r}
+overall_mean <- mean(Summary_TC_Scores$TCS)
+overall_sd <- sd(Summary_TC_Scores$TCS)
+overall <- Summary_TC_Scores %>%
+  group_by(MSAMethod) %>%
+  summarise(
+    mean_TCS = mean(TCS),
+    sd_TCS = sd(TCS)
+  )
+overall
+```
+
+```{r}
+ggplot(overall, aes(x = MSAMethod, y = mean_TCS, fill = MSAMethod)) +
+  geom_col(colour = "black") + 
+  geom_errorbar(aes(ymin = mean_TCS - sd_TCS,
+                    ymax = mean_TCS + sd_TCS),
+                width = 0.2) +
+  scale_fill_manual(values = c("#DF4F4F", "#CFCF24", "#2BE62B", "#3FDADA", "#3232D4", "#DD2DDD")) +
+  labs(x = "MSA Method",
+       y = "Alignment accuracy (Total Column Score)",
+       title = "Overall Alignment Accuracy across MSA Methods") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none")
+
+# uses colour blind friendly palette - from https://rgblind.com/color-blind-palette
+```
+
+```{r}
+range_df <- Summary_TC_Scores %>%
+  group_by(MSAMethod) %>%
+  summarise(
+    mean_TCS = mean(TCS),
+    min_TCS = min(TCS),
+    max_TCS = max(TCS))
+
+ggplot(range_df, aes(x = MSAMethod, y = mean_TCS, fill = MSAMethod)) +
+  geom_col(colour = "black") +
+  geom_errorbar(aes(ymin = min_TCS,
+                    ymax = max_TCS),
+                width = 0.2) +
+  labs(
+    x = "MSA Method",
+    y = "Alignment accuracy (Total Column Score)",
+    title = "Overall Alignment Accuracy across MSA Methods"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none"
+  )
+
+```
+
+
+```{r}
+
+df_10A <- Summary_TC_Scores %>% filter(GapLength == 10, GapPattern == "A")
+df_10B <- Summary_TC_Scores %>% filter(GapLength == 10, GapPattern == "B")
+df_30A <- Summary_TC_Scores %>% filter(GapLength == 30, GapPattern == "A")
+df_30B <- Summary_TC_Scores %>% filter(GapLength == 30, GapPattern == "B")
+
+
+plot_actual <- function(Summary_TC_Scores, title_text) 
+  ggplot(Summary_TC_Scores, aes(x = MSAMethod, y = TCS, fill = MSAMethod)) +
+    geom_boxplot(colour = "black") +
+    labs(
+      x = "MSA Method",
+      y = "Total Column Score (TCS)",
+      title = title_text
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),
+      legend.position = "none")
+
+
+plot_10A <- plot_actual(df_10A, "Alignment Accuracy (10aa Removed, Pattern A)")
+plot_10B <- plot_actual(df_10B, "Alignment Accuracy (10aa Removed, Pattern B)")
+plot_30A <- plot_actual(df_30A, "Alignment Accuracy (30aa Removed, Pattern A)")
+plot_30B <- plot_actual(df_30B, "Alignment Accuracy (30aa Removed, Pattern B)")
+
+plot_10A
+plot_10B
+plot_30A
+plot_30B
+
+
+```
+
+
+```{r}
+library(viridis)
+ggplot(Summary_TC_Scores, aes(x = Alignment, y = MSAMethod, fill = TCS)) +
+  geom_tile(colour = "black", linewidth = 0.5) +
+  scale_fill_viridis(option = "turbo",
+                     direction = 1,
+                     name = "TC Score") +
+  labs(
+       x = "Condition",
+       y = "MSA Method") +
+  theme_minimal(base_size = 12) 
+
+```
+
+
+```{r}
+ggplot(data = Summary_TC_Scores, aes(x = MSAMethod, y = TCS)) +
+  geom_boxplot(aes(color = MSAMethod), width = 0.6, size = 1, show.legend = FALSE) +
+  stat_summary(fun = mean, colour = "black", geom = "point", shape = 18, size = 4) +
+  scale_fill_manual(values = c("#DF4F4F", "#CFCF24", "#2BE62B", "#3FDADA", "#3232D4", "#DD2DDD")) +
+  geom_jitter(aes(color = MSAMethod), 
+              width = 0.1,
+              size = 2,
+              alpha = 0.5,
+              show.legend = FALSE) +
+  coord_cartesian(ylim = c(0.5, 1)) +
+  theme_minimal(base_size = 12) +
+  labs(x = "MSA Method", y = "Total Column Score")
+
+
+```
+
+```{r}
+df_gap_line <- Summary_TC_Scores %>%
+  group_by(MSAMethod, GapLength) %>%
+  summarise(mean_TCS = mean(TCS))
+
+ggplot(df_gap_line, aes(x = GapLength, y = mean_TCS, group = MSAMethod, colour = MSAMethod)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  scale_x_continuous(breaks = c(10, 30)) +
+  scale_fill_manual(values = c("#DF4F4F", "#CFCF24", "#2BE62B", "#3FDADA", "#3232D4", "#DD2DDD")) +
+  theme_minimal(base_size = 14) +
+  coord_cartesian(ylim = c(0.75, 1)) +
+
+  labs(
+    x = "Gap Length (amino acids)",
+    y = "Mean Total Column Score"
+  ) +
+  theme_minimal(base_size = 12)+
+  theme(aspect.ratio = 0.6)
+
+
+```
+
+
+```{r}
+df_pattern_line <- Summary_TC_Scores %>%
+  group_by(MSAMethod, GapPattern) %>%
+  summarise(mean_TCS = mean(TCS))
+
+ggplot(df_pattern_line, aes(x = GapPattern, 
+                            y = mean_TCS, 
+                            group = MSAMethod, 
+                            colour = MSAMethod)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  scale_fill_manual(values = c("#DF4F4F", "#CFCF24", "#2BE62B", "#3FDADA", "#3232D4", "#DD2DDD")) +
+  theme_minimal(base_size = 14) +
+  coord_cartesian(ylim = c(0.75, 1)) +
+
+  labs(
+    x = "Gap Pattern (A = overlapping, B = non-overlapping)",
+    y = "Mean Total Column Score") +
+  theme_minimal(base_size = 12) +
+  scale_x_discrete(drop = FALSE) +
+  theme(aspect.ratio = 0.6)
+
+
+
+
+```
+
+```{r}
+library(ggplot2)
+library(viridis)
+
+ggplot(Summary_TC_Scores, aes(x = MSAMethod, y = TCS, colour = MSAMethod)) +
+  geom_point(size = 2) +
+  facet_wrap(~ paste(GapLength, GapPattern, sep = "aa gap - Pattern "), ncol = 2) +
+  scale_fill_manual(values = c("#DF4F4F", "#CFCF24", "#2BE62B", "#3FDADA", "#3232D4", "#DD2DDD")) +
+  labs(
+    x = "MSA Method",
+    y = "Total Column Score (TCS)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "none")
+
+```
+
+
