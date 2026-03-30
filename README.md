@@ -135,6 +135,8 @@ MORE INFORMATION: https://biopython.org/
 
 ### AliDist - version 0.9 (Accuracy Assessment software)
 
+Compares reference/true alignment to inferred MSA alignment - obtains the Total Column (TC) Score and Alignment Extension Length (AEL).
+
 Jermiin LS. (2026) 
 
 Contact: lars.jermiin [at] universityofgalway.ie / anu.edu.au
