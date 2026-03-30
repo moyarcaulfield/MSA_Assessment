@@ -106,3 +106,37 @@ REFERENCE: Notredame C, Higgins DG, Heringa L,
 JMB, 302(1):205 (2000)
 
 MORE INFORMATION: http://tcoffee.crg.cat/apps/tcoffee/index.html
+
+## ***Software References*** 
+
+### Jalview - version 2.11.5.1 (GUI software)
+
+Waterhouse, A.M., Procter, J.B., Martin, D.M.A, Clamp, M. and Barton, G. J. (2009) Jalview Version 2 - a multiple sequence alignment editor and analysis workbench Bioinformatics doi: 10.1093/bioinformatics/btp033
+
+MORE INFORMATION: https://www.jalview.org/
+
+### Aliview - version 1.28 (GUI software)
+
+Larsson, A. (2014). AliView: a fast and lightweight alignment viewer and editor for large data sets. Bioinformatics30(22): 3276-3278. http://dx.doi.org/10.1093/bioinformatics/btu531
+
+MORE INFORMATION: https://ormbunkar.se/aliview/
+
+### Spyder - version 6.1.3 (IDE - Integrated Development Environment)
+
+Raybaut P. (2009). Spyder-documentation.
+
+MORE INFORMATION: https://www.spyder-ide.org/
+
+### Biopython - version 1.86 (Python package)
+
+Cock, P. J., Antao, T., Chang, J. T., Chapman, B. A., Cox, C. J., Dalke, A., … others. (2009). Biopython: freely available Python tools for computational molecular biology and bioinformatics. Bioinformatics, 25(11), 1422–1423.
+
+MORE INFORMATION: https://biopython.org/
+
+### AliDist - version 0.9 (Accuracy Assessment software)
+
+Jermiin LS. (2026) 
+
+Contact: lars.jermiin [at] universityofgalway.ie / anu.edu.au
+
+Will be publicly available at a later date.
