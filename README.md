@@ -17,7 +17,7 @@ Graphs and figures made using Rstudio
 
 10aa - 10 amino acids removed from a sequence to introduce a gap
 
-30aa - 30 amino acids removed freom a sequence to introduce a gap
+30aa - 30 amino acids removed from a sequence to introduce a gap
 
 **Gap Pattern** 
 
