@@ -12,14 +12,15 @@ library(viridis)
 library(table1)
 ```
 
-```{r warning=FALSE, echo=FALSE}
+### Summary table MSA Methods
 
+```{r}
 table1(~TCS | MSAMethod, data=Summary_TC_Scores)
-
 ```
 
 
-### Overall Alignment Accuracy
+### MSA Methods Mean & sd
+
 ```{r}
 overall_mean <- mean(Summary_TC_Scores$TCS)
 overall_sd <- sd(Summary_TC_Scores$TCS)
@@ -27,10 +28,11 @@ overall <- Summary_TC_Scores %>%
   group_by(MSAMethod) %>%
   summarise(
     mean_TCS = mean(TCS),
-    sd_TCS = sd(TCS)
-  )
+    sd_TCS = sd(TCS))
 overall
 ```
+
+### Overall Alignment Accuracy across MSA Methods (Error - range)
 
 ```{r}
 ggplot(overall, aes(x = MSAMethod, y = mean_TCS, fill = MSAMethod)) +
@@ -49,6 +51,8 @@ ggplot(overall, aes(x = MSAMethod, y = mean_TCS, fill = MSAMethod)) +
 # uses colour blind friendly palette - from https://rgblind.com/color-blind-palette
 ```
 
+### Overall Alignment Accuracy across MSA Methods (Error - standard deviation)
+
 ```{r}
 range_df <- Summary_TC_Scores %>%
   group_by(MSAMethod) %>%
@@ -65,52 +69,14 @@ ggplot(range_df, aes(x = MSAMethod, y = mean_TCS, fill = MSAMethod)) +
   labs(
     x = "MSA Method",
     y = "Alignment accuracy (Total Column Score)",
-    title = "Overall Alignment Accuracy across MSA Methods"
-  ) +
+    title = "Overall Alignment Accuracy across MSA Methods") +
   theme_minimal() +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
-    legend.position = "none"
-  )
-
+    legend.position = "none")
 ```
 
-
-```{r}
-
-df_10A <- Summary_TC_Scores %>% filter(GapLength == 10, GapPattern == "A")
-df_10B <- Summary_TC_Scores %>% filter(GapLength == 10, GapPattern == "B")
-df_30A <- Summary_TC_Scores %>% filter(GapLength == 30, GapPattern == "A")
-df_30B <- Summary_TC_Scores %>% filter(GapLength == 30, GapPattern == "B")
-
-
-plot_actual <- function(Summary_TC_Scores, title_text) 
-  ggplot(Summary_TC_Scores, aes(x = MSAMethod, y = TCS, fill = MSAMethod)) +
-    geom_boxplot(colour = "black") +
-    labs(
-      x = "MSA Method",
-      y = "Total Column Score (TCS)",
-      title = title_text
-    ) +
-    theme_minimal(base_size = 14) +
-    theme(
-      axis.text.x = element_text(angle = 45, hjust = 1),
-      legend.position = "none")
-
-
-plot_10A <- plot_actual(df_10A, "Alignment Accuracy (10aa Removed, Pattern A)")
-plot_10B <- plot_actual(df_10B, "Alignment Accuracy (10aa Removed, Pattern B)")
-plot_30A <- plot_actual(df_30A, "Alignment Accuracy (30aa Removed, Pattern A)")
-plot_30B <- plot_actual(df_30B, "Alignment Accuracy (30aa Removed, Pattern B)")
-
-plot_10A
-plot_10B
-plot_30A
-plot_30B
-
-
-```
-
+### Heatmap - Alignment Accuracy across MSA Methods
 
 ```{r}
 library(viridis)
@@ -123,9 +89,9 @@ ggplot(Summary_TC_Scores, aes(x = Alignment, y = MSAMethod, fill = TCS)) +
        x = "Condition",
        y = "MSA Method") +
   theme_minimal(base_size = 12) 
-
 ```
 
+### Boxplot - Alignment Accuracy with MSA Methods vs. Total Column Score
 
 ```{r}
 ggplot(data = Summary_TC_Scores, aes(x = MSAMethod, y = TCS)) +
@@ -140,9 +106,11 @@ ggplot(data = Summary_TC_Scores, aes(x = MSAMethod, y = TCS)) +
   coord_cartesian(ylim = c(0.5, 1)) +
   theme_minimal(base_size = 12) +
   labs(x = "MSA Method", y = "Total Column Score")
-
-
 ```
+
+### Lineplot - Gap Length vs. Mean TC Score 
+
+#### (i.e. taking the Mean TC Score of Gap Length of 10 as the mean of Pattern A and Pattern B with deletions of 10 residues)
 
 ```{r}
 df_gap_line <- Summary_TC_Scores %>%
@@ -163,10 +131,11 @@ ggplot(df_gap_line, aes(x = GapLength, y = mean_TCS, group = MSAMethod, colour =
   ) +
   theme_minimal(base_size = 12)+
   theme(aspect.ratio = 0.6)
-
-
 ```
 
+### Lineplot - Gap Pattern vs. Mean TC Score 
+
+#### (i.e. taking the Mean TC Score of Gap Pattern A as the mean of deletions of 10 and 30 residues with gap pattern A)
 
 ```{r}
 df_pattern_line <- Summary_TC_Scores %>%
@@ -189,10 +158,6 @@ ggplot(df_pattern_line, aes(x = GapPattern,
   theme_minimal(base_size = 12) +
   scale_x_discrete(drop = FALSE) +
   theme(aspect.ratio = 0.6)
-
-
-
-
 ```
 
 ```{r}
@@ -211,7 +176,6 @@ ggplot(Summary_TC_Scores, aes(x = MSAMethod, y = TCS, colour = MSAMethod)) +
   theme(
     axis.text.x = element_text(angle = 45, hjust = 1),
     legend.position = "none")
-
 ```
 
 
