@@ -7,9 +7,9 @@ Python code was written and executed in Spyder (version 6.1.3 | Python 3.12.11 6
 
 Alignments were generated and visualised using Jalview (version 2.11.5.1) and Aliview (version 1.28)
 
-Accuracy of MSA methods is calculated by Total Column Score by AliDist software by Lars Jermiin
+Accuracy of MSA methods is calculated using distance metric Total Column Score by AliDist software by Lars Jermiin
 
-Graphs and figures made using Rstudio 
+Graphs and figures made using Rstudio and Microsoft Powerpoint.
 
 ## Guide to understanding file names: 
 
